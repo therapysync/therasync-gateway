@@ -1,0 +1,19 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: therasync-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: therasync-auth
+          uri: http://localhost:8080
+          predicates:
+            - Path=/auth/token
+security:
+  auth-service-url: http://localhost:8080
+  public-paths:
+    - /auth
+
+

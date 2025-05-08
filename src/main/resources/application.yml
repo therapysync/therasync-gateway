@@ -11,9 +11,14 @@ spring:
           uri: http://localhost:8080
           predicates:
             - Path=/auth/token
+        - id: therasync-clients
+          uri: http://localhost:8081
+          predicates:
+            - Path=/test/**, /not-test
 security:
   auth-service-url: http://localhost:8080
   public-paths:
     - /auth
+    - /not-test
 
 

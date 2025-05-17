@@ -1,4 +1,4 @@
-package project.therasync.config.security
+package project.therasync.config.security.rest
 
 import project.therasync.config.model.AuthInfoResponse
 import project.therasync.config.model.SecurityProperties
@@ -42,7 +42,7 @@ class AuthValidationFilter(
             .bodyToMono(AuthInfoResponse::class.java)
             .flatMap { authInfo ->
                 val mutatedRequest = exchange.request.mutate()
-                    .header("X-Client-Id", authInfo.clientId)
+                    .header("X-Client-Id", authInfo.clientId.toString())
                     .header("X-Role", authInfo.role)
                     .build()
 

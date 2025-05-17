@@ -1,6 +1,6 @@
 package project.therasync.config.model
 
 data class AuthInfoResponse(
-    val clientId: String,
+    val clientId: Long,
     val role: String
 )

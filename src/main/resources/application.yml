@@ -7,18 +7,29 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: dualeasy-chat-rest
+          uri: http://localhost:1256
+          predicates:
+            - Path=/api/chat/**, /ws/**
+          filters:
+            - name: RemoveRequestHeader
+              args:
+                name: Sec-WebSocket-Protocol
+        - id: dualeasy-chat-ws
+          uri: ws://localhost:1256
+          predicates:
+            - Path=/ws/**
         - id: therasync-auth
           uri: http://localhost:8080
           predicates:
-            - Path=/auth/token
+            - Path=/auth/token, /api/users/**
         - id: therasync-clients
-          uri: http://localhost:8081
+          uri: http://localhost:8090
           predicates:
-            - Path=/test/**, /not-test
+            - Path=/api/appointments/**, /api/clients/**, /api/tasks/**
 security:
   auth-service-url: http://localhost:8080
   public-paths:
     - /auth
     - /not-test
-
-
+    - /ws/info
